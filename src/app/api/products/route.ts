@@ -6,13 +6,10 @@ const prisma = new PrismaClient();
 // GET
 export async function GET() {
     try {
-        const products = await prisma.products.findMany();
+        const products = await prisma.product.findMany();
         return NextResponse.json(products);
     } catch (error) {
-        return NextResponse.json(
-            { error: 'Неуспешно извличане на продукти' },
-            { status: 500 }
-        );
+        return NextResponse.json({ error: 'Неуспешно извличане на продукти' }, { status: 500 });
     }
 }
 
