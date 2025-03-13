@@ -15,3 +15,22 @@ export async function GET() {
         );
     }
 }
+
+// Post
+export async function POST(req: Request) {
+    try {
+        const body = await req.json();
+        const newProduct = await prisma.product.create({
+            data: {
+                name: body.name,
+                description: body.description,
+                price: parseFloat(body.price),
+                imageUrl: body.imageUrl,
+                category: body.categoryId
+            }
+        })
+        return NextResponse.json(newProduct, { status: 201 });
+    } catch (error) {
+        return NextResponse.json({ error: 'Неуспешно създаване на продукт' }, { status: 500 });
+    }
+}
