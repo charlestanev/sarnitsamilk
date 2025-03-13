@@ -26,7 +26,7 @@ export async function POST(req: Request) {
                 description: body.description,
                 price: parseFloat(body.price),
                 imageUrl: body.imageUrl,
-                category: body.categoryId
+                categoryId: body.categoryId
             }
         })
         return NextResponse.json(newProduct, { status: 201 });
