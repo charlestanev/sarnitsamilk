@@ -16,13 +16,19 @@ export default function AdminPanel() {
 
     useEffect(() => {
         fetch('/api/products')
-            .then((res) => res.json())
-            .then((data) => setProducts(data))
-            .catch((error) => console.error("Грешка при зареждане на продукти:", error));
+            .then(res => res.json())
+            .then(data => setProducts(data))
+            .catch(error => console.error("Грешка при зареждане на продукти:", error));
     }, []);
 
 
-
+    // Deleting a product
+    const deleteProduct = async (id: string) => {
+        if (confirm("Сигурен ли си, че искаш да изтриеш този продукт?")) {
+            await fetch(`/api/products/${id}`, { method: "DELETE" });
+            setProducts(products.filter(product => product.id !== id));
+        }
+    };
 
 
 
