@@ -31,3 +31,21 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: 'Неуспешно създаване на продукт' }, { status: 500 });
     }
 }
+
+// DELETE
+export async function DELETE(req: Request) {
+    try {
+        const { searchParams } = new URL(req.url);
+        const id = searchParams.get("id");
+
+        if (!id) {
+            return NextResponse.json({ error: "Не е подадено ID" }, { status: 400 });
+        }
+
+        await prisma.product.delete({ where: { id } });
+
+        return NextResponse.json({ message: "Продуктът е изтрит успешно" });
+    } catch (error) {
+        return NextResponse.json({ error: "Грешка при изтриване на продукта" }, { status: 500 });
+    }
+}
