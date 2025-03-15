@@ -4,15 +4,15 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 export default function AddProductPAge() {
-    const productSchema = 
+    // const productSchema = 
 
-    const router = useRouter();
+    // const router = useRouter();
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
+    // const {
+    //     register,
+    //     handleSubmit,
+    //     formState: { errors },
+    // } = useForm();
 
     // const onSubmit = async (data: any) => {
     //     await fetch('/api/products', {
