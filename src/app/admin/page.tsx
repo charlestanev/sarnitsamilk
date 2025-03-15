@@ -46,7 +46,7 @@ export default function AdminPage() {
                             <Link href={`/admin/edit/${product.id}`} className="bg-yellow-500 text-white px-2 py-1 rounded mr-2">
                                 Редактирай
                             </Link>
-                            <button onClick={() => deleteProduct(product.id)} className="bg-red-500 text-white px-2 py-1 rounded">
+                            <button onClick={() => deleteProduct(product.id)} className="text-white px-2 py-1 rounded">
                                 Изтрий
                             </button>
                         </div>
