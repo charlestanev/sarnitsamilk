@@ -17,18 +17,37 @@ export async function GET() {
 export async function POST(req: Request) {
     try {
         const body = await req.json();
+
+        if (!body.name || !body.price || !body.imageUrl || !body.categoryId) {
+            return NextResponse.json({ error: "Всички полета са задължителни" }, { status: 400 });
+        }
+
+        const categoryExists = await prisma.category.findUnique({
+            where: { id: body.categoryId },
+        });
+
+        if (!categoryExists) {
+            return NextResponse.json(
+                { error: `Категория с ID '${body.categoryId}' не съществува!` },
+                { status: 400 }
+            );
+        }
+
         const newProduct = await prisma.product.create({
             data: {
                 name: body.name,
-                description: body.description,
+                description: body.description || "",
                 price: parseFloat(body.price),
                 imageUrl: body.imageUrl,
-                categoryId: body.categoryId
-            }
-        })
+                categoryId: body.categoryId,
+            },
+        });
+
+
         return NextResponse.json(newProduct, { status: 201 });
     } catch (error) {
-        return NextResponse.json({ error: 'Неуспешно създаване на продукт' }, { status: 500 });
+        console.error("Грешка при добавяне на продукт:", error);
+        return NextResponse.json({ error: "Неуспешно създаване на продукт" }, { status: 500 });
     }
 }
 
