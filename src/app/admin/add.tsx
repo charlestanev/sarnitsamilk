@@ -12,4 +12,10 @@ export default function AddProductPAge() {
         imageUrl: "",
         categoryId: "",
     });
+
+    const handleChange = (e:React.Chan)
+
+
+
+
 }
